@@ -1,0 +1,29 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-c-and-python:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Compile Ccode with GCC
+      run: gcc -Wall -Wextra -Werror -pedantic -std=c99 Ccode.c -o bd_map
+
+    - name: Test C map generation
+      run: ./bd_map | grep "\*"
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Run Python encoder/decoder round-trip test
+      run: python ascii_map_generator.py

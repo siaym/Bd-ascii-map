@@ -1,0 +1,17 @@
+# Executables & object files
+*.exe
+*.out
+*.o
+*.obj
+bd_map
+Ccode
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
